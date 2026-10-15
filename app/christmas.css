@@ -1,0 +1,191 @@
+:root { --green:#21613f; --green-dark:#17462f; --red:#ba2c3d; --gold:#bd9550; --text:#263d2e; --muted:#75836b; --cream:#fbf8ef; --paper:#fffdf7; --border:#e5e3d2; }
+.christmas-theme .workspace { background:radial-gradient(circle at 7px 7px,#bf9b5f0b 1.3px,transparent 1.5px) 0 0 / 29px 29px,var(--cream); }
+.christmas-theme .sidebar { background:#173e2c; border-right:3px solid #bd3541; color:#f7ecd5; }
+.christmas-theme .brand>span:last-child { color:#fff8e8; }
+.christmas-theme .brand-icon { background:#bb2c3d; color:#fff4d9; border:1px solid #d65a5c; box-shadow:0 5px 18px #09261840; }
+.christmas-theme .brand-sub { color:#b9cbb4; letter-spacing:1.3px; }
+.christmas-theme .main-nav>button { color:#d1dcc8; }
+.christmas-theme .main-nav>button:hover { background:#28563c; }
+.christmas-theme .main-nav>button.selected { background:#bd3040; color:white; box-shadow:0 5px 16px #081f1924; }
+.christmas-theme .nav-count { background:#ffffff17; color:#f5e6c9; }
+.christmas-theme .selected .nav-count { background:#ffffff26; color:white; }
+.christmas-theme .folders-label { color:#a6bc9c; }
+.christmas-theme .folder-list>button { color:#cedbc4; }
+.christmas-theme .folder-list>button:hover { background:#2b553a; color:#fff3d5; }
+.christmas-theme .folder-check { color:#e8c678; }
+.christmas-theme .sidebar-add { color:#e7c57d; }
+.christmas-theme .sidebar-note { background:#254c34; color:#f5e5c8; border:1px solid #527250; border-top:3px solid #c33c47; }
+.christmas-theme .sidebar-note>span { color:#b9c9a9; }
+.christmas-theme .sidebar-note svg { color:#e1c87d; }
+.christmas-theme .sidebar-note:before,.christmas-theme .sidebar-note:after { color:#dfbc6d; }
+.christmas-theme .sidebar-season { color:#a3bb97; }
+.christmas-theme .season-dot { background:#d0b261; box-shadow:0 0 7px #d0b26155; }
+.christmas-theme .topbar { position:relative; height:83px; background:#fffcf4; border-bottom:1px solid #e9ddc4; }
+.christmas-theme .topbar-left>span { color:#8c6551; font-size:10px; letter-spacing:1.5px; }
+.christmas-theme .topbar-right { position:relative; z-index:2; gap:17px; }
+.christmas-theme .save-status { color:#6d865d; }
+.christmas-theme .save-status.error,.christmas-theme .save-status.conflict { color:var(--red); }
+.christmas-theme .season-tag { background:#fff5e5; border-color:#e5cd9b; color:#9e383d; }
+.animation-toggle { display:flex; align-items:center; gap:5px; padding:8px 9px; background:#f4efdf; border-radius:5px; color:#b03841; font-size:10px; border:1px solid #e9dcc1; }
+.animation-toggle:hover { background:#eee7d1; }
+.christmas-lights { position:absolute; left:0; right:0; bottom:-10px; height:16px; display:flex; align-items:flex-start; justify-content:space-around; pointer-events:none; border-top:1.5px solid #4c704c; z-index:1; }
+.bulb { width:7px; height:11px; border-radius:2px 2px 6px 6px; position:relative; margin-top:2px; animation:light-twinkle 3.8s ease-in-out infinite; }
+.bulb:before { content:''; position:absolute; top:-4px; left:2px; height:4px; width:3px; background:#49734b; }
+.bulb-0 { background:#cd3540; box-shadow:0 2px 9px #d8484155; }
+.bulb-1 { background:#78a356; box-shadow:0 2px 9px #73a14955; }
+.bulb-2 { background:#e0b95e; box-shadow:0 2px 10px #e6b95166; }
+.christmas-theme .workspace main { padding-top:32px; }
+.christmas-theme .festive-hero { min-height:335px; background:radial-gradient(ellipse at 80% 65%,#316b48 0,transparent 64%),#174a32; border:1px solid #1e5839; border-radius:13px; color:#fff8e8; box-shadow:0 8px 30px #23472c0b; margin-bottom:17px; }
+.festive-hero:before { content:''; position:absolute; left:0; top:0; right:0; height:5px; background:repeating-linear-gradient(120deg,#bc3040 0 24px,#f0d794 24px 29px,#175135 29px 52px,#f0d794 52px 57px); opacity:.9; }
+.christmas-theme .hero-copy { padding:41px 0 35px 37px; width:53%; }
+.christmas-theme .hero .eyebrow { color:#efcc82; font-size:9px; letter-spacing:1.6px; }
+.christmas-theme .hero h1 { font-size:47px; line-height:1.13; margin:22px 0 18px; color:#fff8e6; }
+.christmas-theme .hero h1 em { color:#f4d28b; }
+.christmas-theme .hero p { color:#cbdcc0; font-size:12px; line-height:1.9; max-width:390px; }
+.christmas-theme .hero .text-link { color:#fff7e8; background:#c53242; border:1px solid #df6a64; padding:11px 15px; border-radius:6px; font-size:11px; margin-top:24px; box-shadow:0 3px 11px #102a2044; }
+.christmas-theme .hero .text-link:hover { background:#d34049; }
+.christmas-friends { width:47%; min-width:350px; position:relative; align-self:stretch; display:flex; align-items:center; justify-content:center; padding:10px 13px 19px 0; }
+.friends-illustration { width:100%; height:auto; overflow:visible; position:relative; z-index:1; max-height:330px; }
+.friends-caption { position:absolute; bottom:16px; left:0; right:10px; text-align:center; font-family:var(--serif); font-style:italic; font-size:11px; color:#d3dcb7; }
+.hero-snow { position:absolute; inset:7px 0 14px; overflow:hidden; pointer-events:none; }
+.hero-snow i { position:absolute; top:-10px; border-radius:50%; background:#fff9e4; opacity:.65; animation:snow-drift 8s linear infinite; }
+.grinch-bob { animation:grinch-bob 4.8s ease-in-out infinite; }
+.grinch-wave { transform-box:fill-box; transform-origin:20% 85%; animation:grinch-wave 4.8s ease-in-out infinite; }
+.grinch-eyes { transform-box:fill-box; transform-origin:center; animation:grinch-blink 6s ease-in-out infinite; }
+.deer-bob { animation:deer-bob 5.2s ease-in-out infinite; }
+.deer-head { transform-box:fill-box; transform-origin:50% 100%; animation:deer-peek 6.2s ease-in-out infinite; }
+.deer-nose { animation:nose-glow 3.2s ease-in-out infinite; }
+.max-bob { animation:max-bob 3.5s ease-in-out infinite; }
+.max-tail { transform-box:fill-box; transform-origin:12% 95%; animation:max-tail .65s ease-in-out infinite alternate; }
+.max-head { transform-box:fill-box; transform-origin:50% 95%; animation:max-head 5s ease-in-out infinite; }
+.express-banner { display:grid; grid-template-columns:1fr 1.35fr; align-items:center; background:#fffdf4; border:1px solid #e4d9bb; border-radius:9px; overflow:hidden; height:112px; margin:0 0 25px; position:relative; }
+.express-copy { padding:19px 24px; position:relative; z-index:2; }
+.express-ticket { font-size:8px; letter-spacing:1.4px; color:#a2854f; display:block; margin-bottom:8px; }
+.express-copy h2 { font-size:21px; color:#a72e3b; }
+.express-copy p { font-size:10px; color:#7b8b6b; margin-top:8px; }
+.express-landscape { height:110px; width:100%; overflow:hidden; position:relative; background:linear-gradient(180deg,#eef3e9 0,#fffdf5 90%); }
+.express-landscape:before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 20% 25%,#ffffff 1.5px,transparent 2px) 0 0/47px 29px; }
+.express-track { position:absolute; height:100%; width:100%; bottom:0; right:0; }
+.express-rails { position:absolute; inset:auto 0 5px; height:6px; z-index:1; background:repeating-linear-gradient(65deg,transparent 0 15px,#90a7b9 15px 18px,transparent 18px 28px); border-top:2px solid #718da3; border-bottom:1px solid #354d65; box-shadow:0 -1px 0 #d5e3ed; }
+.express-train { position:absolute; width:395px; left:0; bottom:3px; z-index:2; animation:express-journey 23s linear -10s infinite; }
+.express-train svg { display:block; width:100%; overflow:visible; }
+.train-wheel { transform-box:fill-box; transform-origin:center; animation:train-wheel 1.2s linear infinite; }
+.train-steam { animation:train-steam 2.4s ease-in-out infinite; transform-box:fill-box; transform-origin:right; }
+.train-beam { animation:headlight 3s ease-in-out infinite; }
+.christmas-theme .stat { border-top:3px solid #a5313f; box-shadow:0 4px 12px #23392b04; }
+.christmas-theme .stat:nth-child(even) { border-top-color:#326949; }
+.christmas-theme .stat-icon.green { background:#e7f0e3; color:#49794b; }
+.christmas-theme .stat-icon.red { background:#fbe8e4; color:#bd3440; }
+.christmas-theme .stat-icon.gold { background:#f8efd6; color:#b38943; }
+.christmas-theme .stat-value { color:#244d32; }
+.christmas-theme .primary-button { background:#bc2e3e; color:#fff9ec; box-shadow:0 3px 9px #a32d3220; }
+.christmas-theme .primary-button:hover { background:#d03a48; }
+.christmas-theme .secondary-button { border-color:#d9dcca; background:#fffdf5; color:#42673c; }
+.christmas-theme .text-link { color:#a32f3b; }
+.christmas-theme .section-heading h2 { color:#245539; }
+.christmas-theme .section-heading h2>span { background:#f5e8d1; color:#a03941; }
+.christmas-theme .recipe-card { border-color:#e6dfcb; box-shadow:0 5px 13px #264e3206; }
+.christmas-theme .card-art { background:#f5e6dc; }
+.christmas-theme .recipe-card:nth-child(even) .card-art { background:#e6efdf; }
+.christmas-theme .card-art:after { content:''; position:absolute; right:11px; top:12px; width:7px; height:7px; background:#a63442; box-shadow:8px 3px 0 #c34043; border-radius:50%; pointer-events:none; }
+.christmas-theme .card-badge { background:#fff9e9ee; color:#a2443e; border:1px solid #e5cdb1; font-size:9px; }
+.christmas-theme .card-badge.baked,.christmas-theme .card-badge.ready { background:#eaf4dbee; color:#45763a; border-color:#c8d8b4; }
+.card-custom-image { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+.card-art:hover .card-custom-image { transform:scale(1.04); }
+.christmas-theme .card-open { background:#fff8e8d9; color:#b02e3c; border-radius:50%; padding:4px; }
+.christmas-theme .card-title { color:#315335; }
+.christmas-theme .card-footer { color:#a43d43; border-top-color:#ece4d0; }
+.christmas-theme .stepper { background:#f0f4e8; border-color:#d2dcc1; }
+.christmas-theme .stepper button { color:#377045; }
+.christmas-theme .baked-button.checked { color:#fff4dc; background:#346d43; border-color:#346d43; }
+.christmas-theme .tip-panel { background:#f4e9df; border-color:#ebd4c3; border-top:3px solid #bd3542; }
+.christmas-theme .tip-panel h2 { color:#a53a40; }
+.christmas-theme .tip-panel .eyebrow { color:#ab7160; }
+.christmas-theme .tip-panel .tip-icon { background:#edd9c8; color:#9f5a46; }
+.christmas-theme .tip-panel>p { color:#977967; font-size:11px; }
+.christmas-theme .tip-sparkle { color:#bd985f; }
+.christmas-theme .panel-heading { background:#fff9eb; border-bottom-color:#eee0c4; }
+.christmas-theme .heading-with-icon>svg { color:#b73b46; }
+.christmas-theme .shopping-summary { background:#e9f0df; border-color:#cfddbe; border-left:4px solid #b83140; }
+.christmas-theme .shopping-summary h3 { color:#285637; }
+.christmas-theme .summary-icon { color:#b53440; background:#fff6df; }
+.christmas-theme .progress-track i { background:repeating-linear-gradient(115deg,#b33341 0 12px,#c65353 12px 20px); }
+.christmas-theme .filters button.active { color:#aa3340; }
+.christmas-theme .table-header { color:#95785e; background:#faf3e3; }
+.christmas-theme .table-footer { background:#f2f6e8; color:#7c9169; }
+.christmas-theme .purchased { background:#eff5e5; }
+.christmas-theme .page-heading h1 { color:#244e34; }
+.christmas-theme .page-heading em { color:#b23140; }
+.christmas-theme .eyebrow { color:#b07c50; }
+.christmas-theme .editor-header { background:#b92f3d; color:#fff7e6; border-bottom:4px solid #deb96c; }
+.christmas-theme .editor-header .eyebrow,.christmas-theme .editor-header p { color:#f4d8b8; }
+.christmas-theme .dialog-close { color:#fff4dc; }
+.christmas-theme .dialog-close:hover { background:#d4444a; }
+.editor-art img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:8px; border:3px solid #f5e0b7; }
+.custom-image-section { background:#f0f5e8; border:1px dashed #c1d1b0; border-radius:8px; padding:16px; margin:0 0 25px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.custom-image-copy { flex:1; min-width:190px; }
+.custom-image-copy h3 { display:flex; align-items:center; gap:7px; font-family:var(--serif); font-size:18px; color:#35633e; }
+.custom-image-copy p { font-size:10px; line-height:1.7; color:#7c8e6a; margin-top:7px; }
+.custom-image-copy small { display:block; font-size:9px; color:#8b9e79; margin-top:4px; }
+.image-upload-actions { display:flex; flex-direction:column; gap:7px; align-items:flex-start; }
+.image-upload-actions>small { font-size:8px; color:#9aa888; }
+.upload-preview { height:72px; width:90px; object-fit:cover; border-radius:6px; border:2px solid #fffaf0; }
+.remove-image-button { font-size:9px; padding:1px 0; color:#af4549; text-decoration:underline; }
+.image-upload-error { font-size:11px; color:#a5333e; width:100%; }
+.christmas-theme .editor-footer { border-top:2px solid #e8dcc1; }
+.christmas-theme .image-upload-actions .secondary-button { background:#fffdf3; border-color:#b9cba7; }
+.christmas-theme .notes-label>span { color:#899b78; }
+.no-motion .christmas-lights span,.no-motion .christmas-friends g,.no-motion .deer-nose,.no-motion .express-train,.no-motion .train-wheel,.no-motion .train-steam,.no-motion .train-beam { animation:none!important; }
+.no-motion .hero-snow { display:none; }
+.no-motion .express-train { transform:translateX(60px); }
+@keyframes light-twinkle { 0%,100%{opacity:1} 50%{opacity:.5} }
+@keyframes snow-drift { 0%{transform:translate(0,-15px);opacity:0} 8%{opacity:.7} 90%{opacity:.5} 100%{transform:translate(-25px,355px);opacity:0} }
+@keyframes grinch-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+@keyframes grinch-wave { 0%,25%,100%{transform:rotate(0)} 35%,55%{transform:rotate(13deg)} 45%,65%{transform:rotate(-9deg)} 75%{transform:rotate(0)} }
+@keyframes grinch-blink { 0%,41%,45%,100%{transform:scaleY(1)} 43%{transform:scaleY(.08)} }
+@keyframes deer-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+@keyframes deer-peek { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(4deg)} }
+@keyframes nose-glow { 0%,100%{filter:drop-shadow(0 0 0 #f7774c00)} 50%{filter:drop-shadow(0 0 5px #f77d5099)} }
+@keyframes max-tail { from{transform:rotate(-17deg)} to{transform:rotate(19deg)} }
+@keyframes max-head { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(5deg)} }
+@keyframes max-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-2px)} }
+@keyframes express-journey { from{transform:translateX(-430px)} to{transform:translateX(710px)} }
+@keyframes train-wheel { to{transform:rotate(360deg)} }
+@keyframes train-steam { 0%{transform:translate(5px,3px) scale(.8);opacity:.45} 60%{opacity:.9} 100%{transform:translate(-25px,-5px) scale(1.2);opacity:0} }
+@keyframes headlight { 0%,100%{opacity:.16} 50%{opacity:.26} }
+@media(min-width:1500px) { .christmas-theme .festive-hero{min-height:367px}.christmas-theme .hero h1{font-size:56px}.christmas-theme .hero-copy{padding-left:43px}.christmas-friends{padding-right:23px}.friends-illustration{max-height:350px}.friends-caption{font-size:13px;bottom:20px} }
+@media(max-width:1200px) { .christmas-theme .hero h1{font-size:41px}.christmas-theme .hero-copy{padding-left:28px;width:53%}.christmas-friends{min-width:290px;width:47%}.christmas-theme .hero p{font-size:11px}.express-copy{padding-left:22px}.express-copy h2{font-size:19px}.express-copy p{font-size:9px}.express-train{width:360px}.animation-toggle>span{display:none} }
+@media(max-width:1000px) { .christmas-theme .festive-hero{min-height:307px}.christmas-theme .hero h1{font-size:36px}.christmas-theme .hero-copy{padding-top:34px;padding-bottom:30px}.christmas-friends{min-width:245px}.friends-caption{font-size:9px;bottom:25px}.christmas-theme .hero .eyebrow{font-size:7px}.express-banner{grid-template-columns:1fr 1fr;height:100px}.express-landscape{height:100px}.express-copy{padding:16px 18px}.express-copy h2{font-size:18px;line-height:1.15}.express-ticket{font-size:6px;letter-spacing:1px}.express-copy p{font-size:8px;line-height:1.6}.express-train{width:330px}.topbar-right{gap:11px!important} }
+@media(max-width:760px) { .christmas-theme .topbar{height:71px}.christmas-theme .workspace main{padding-top:26px}.christmas-theme .hero-copy{padding:30px 0 30px 27px;width:53%}.christmas-theme .hero h1{font-size:38px}.christmas-friends{min-width:230px;width:47%}.christmas-theme .hero p{font-size:11px}.christmas-theme .hero .text-link{font-size:10px;padding:10px 12px}.friends-caption{font-size:9px;bottom:27px}.express-banner{height:109px}.express-landscape{height:109px}.express-copy h2{font-size:20px}.express-copy p{font-size:9px}.express-ticket{font-size:7px}.express-train{width:355px}.christmas-theme .editor-header{padding:19px 20px}.custom-image-copy{min-width:160px} }
+@media(max-width:600px) { .christmas-theme .festive-hero{flex-direction:column;min-height:490px}.christmas-theme .hero-copy{width:100%;padding:29px 25px 5px}.christmas-theme .hero h1{font-size:39px;margin:20px 0 15px}.christmas-theme .hero .eyebrow{font-size:8px}.christmas-theme .hero p{font-size:12px;max-width:none;line-height:1.8}.christmas-theme .hero .text-link{font-size:11px;margin-top:19px}.christmas-friends{height:236px;min-width:0;width:100%;max-width:420px;align-self:center;padding:0 10px 20px;margin-top:6px}.friends-illustration{height:236px;width:100%;max-height:none}.friends-caption{bottom:9px;font-size:10px;left:0;right:0}.hero-snow{inset:0}.express-banner{grid-template-columns:1fr;height:176px;margin-bottom:23px}.express-copy{padding:16px 20px 0}.express-copy h2{font-size:21px}.express-ticket{font-size:7px;margin-bottom:7px}.express-copy p{font-size:10px;margin-top:6px}.express-landscape{height:85px}.express-track{min-width:100%;height:93px;right:0}.express-train{width:302px;bottom:0;animation-duration:19s;animation-delay:-7s}.christmas-theme .topbar-right{gap:11px}.christmas-theme .season-tag{font-size:9px}.christmas-theme .save-status>span{font-size:9px}.christmas-theme .animation-toggle{padding:7px}.custom-image-section{padding:13px;gap:12px}.custom-image-copy{min-width:0;flex-basis:65%}.custom-image-copy h3{font-size:18px}.custom-image-copy p{font-size:10px}.upload-preview{width:72px;height:66px}.image-upload-actions{width:100%}.image-upload-actions .secondary-button{font-size:11px}.christmas-theme .editor-header{padding:15px 16px}.christmas-theme .card-badge{font-size:8px}.christmas-theme .card-art:after{width:5px;height:5px;right:13px;top:13px}.christmas-theme .hero h1 em{letter-spacing:-.5px} }
+@media(max-width:360px) { .christmas-theme .hero-copy{padding-left:20px;padding-right:20px}.christmas-theme .hero h1{font-size:35px}.christmas-theme .hero p{font-size:11px}.friends-caption{font-size:9px}.christmas-theme .topbar-right{gap:8px}.christmas-theme .save-status>span{display:none}.christmas-theme .festive-hero{min-height:475px} }
+@media(prefers-reduced-motion:reduce) { .christmas-lights span,.christmas-friends g,.deer-nose,.express-train,.train-wheel,.train-steam,.train-beam{animation:none!important}.hero-snow{display:none}.express-train{transform:translateX(35px)} }
+@media print { .christmas-friends,.express-banner,.christmas-lights,.animation-toggle{display:none!important}.christmas-theme .workspace{background:white}.christmas-theme .shopping-summary{background:white}.christmas-theme .stat{box-shadow:none}.christmas-theme .sidebar{display:none} }
+
+/* Night colors and proportions follow the film's 1225 locomotive. */
+.express-banner { height:126px; }
+.express-landscape.polar-night { height:124px; background:linear-gradient(160deg,#24486b,#0c203a 65%,#101d30); }
+.express-landscape.polar-night:before { background:radial-gradient(circle at 20% 25%,#eef5fc99 1px,transparent 1.5px) 0 0 / 41px 23px; }
+.polar-night .express-train { width:480px; bottom:-8px; }
+.no-motion .polar-night .express-train { transform:translateX(10px); }
+.train-rod { animation:train-rod 1.2s linear infinite; }
+.no-motion .train-rod { animation:none!important; }
+@keyframes express-journey { from{transform:translateX(-650px)} to{transform:translateX(710px)} }
+@keyframes train-rod { 0%,100%{transform:translate(0,0)} 25%{transform:translate(-2px,-2px)} 50%{transform:translate(0,-4px)} 75%{transform:translate(2px,-2px)} }
+@media(max-width:1200px) { .polar-night .express-train{width:440px;bottom:-7px} }
+@media(max-width:1000px) { .express-banner{height:118px}.express-landscape.polar-night{height:116px}.polar-night .express-train{width:360px;bottom:-5px} }
+@media(max-width:760px) { .express-banner{height:126px}.express-landscape.polar-night{height:124px}.polar-night .express-train{width:430px;bottom:-6px} }
+@media(max-width:600px) { .express-banner{height:188px}.express-landscape.polar-night{height:96px}.polar-night .express-train{width:min(330px,calc(100% - 18px));bottom:-4px}.no-motion .polar-night .express-train{transform:translateX(7px)} }
+@media(prefers-reduced-motion:reduce) { .train-rod{animation:none!important}.polar-night .express-train{transform:translateX(8px)} }
+
+.christmas-countdown { margin:20px 0 18px; max-width:390px; }
+.christmas-theme .hero .christmas-countdown h1 { font-size:29px; line-height:1.15; letter-spacing:-.6px; margin:0 0 14px; }
+.countdown-clock { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+.countdown-unit { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:75px; padding:7px 4px 8px; border:1px solid #edcb794d; border-radius:8px; background:linear-gradient(160deg,#fff2c710,#112e253b); box-shadow:0 3px 10px #0e281827; }
+.countdown-unit strong { font-family:var(--serif); font-size:38px; font-weight:400; line-height:1.05; color:#f4d28b; font-variant-numeric:tabular-nums; }
+.countdown-unit span { margin-top:5px; font-size:8px; letter-spacing:1.1px; text-transform:uppercase; color:#e7e7ce; }
+.countdown-date { margin-top:10px; font-size:9px; letter-spacing:.5px; color:#d8ddb9; }
+@media(max-width:1200px) { .christmas-theme .hero .christmas-countdown h1{font-size:27px}.countdown-unit strong{font-size:34px}.countdown-unit{min-height:70px} }
+@media(max-width:1000px) { .christmas-countdown{margin:17px 0}.countdown-clock{gap:6px}.countdown-unit strong{font-size:30px}.countdown-unit span{font-size:7px;letter-spacing:.6px}.countdown-unit{min-height:66px}.christmas-theme .hero .christmas-countdown h1{font-size:26px} }
+@media(max-width:600px) { .christmas-countdown{max-width:none;margin:20px 0 18px}.countdown-clock{gap:8px}.countdown-unit strong{font-size:37px}.countdown-unit span{font-size:8px}.countdown-unit{min-height:77px}.christmas-theme .hero .christmas-countdown h1{font-size:31px}.countdown-date{font-size:10px}.christmas-friends{padding-bottom:0} }
+@media(max-width:360px) { .countdown-clock{gap:6px}.countdown-unit strong{font-size:33px}.christmas-theme .hero .christmas-countdown h1{font-size:28px} }

@@ -1,0 +1,27 @@
+@media screen {
+  .backup-actions { display: flex; gap: 16px; }
+  .main-nav>button { font-size: 14px; }
+  .folder-list>button { font-size: 12px; }
+  .hero p, .page-heading p { font-size: 12px; }
+  .stat-label, .card-body>p, .section-heading p { font-size: 11px; }
+  .stat p, .card-footer, .card-controls>span { font-size: 10px; }
+  .shopping-label strong, .included-row>span { font-size: 13px; }
+  .shopping-label small, .shopping-quantity small, .shopping-help, .included-row small { font-size: 10px; }
+  .filters button, .search-box input, .shopping-toolbar .search-box input { font-size: 11px; }
+  .editor-name-row label, .notes-label, .include-checkbox { font-size: 12px; }
+  .ingredient-hint { font-size: 10px; }
+}
+@media screen and (max-width:760px) {
+  .sidebar { visibility: hidden; }
+  .sidebar.open { visibility: visible; }
+}
+@media screen and (max-width:530px) {
+  .page-footer { flex-wrap: wrap; gap: 13px; }
+  .hero p, .page-heading p { font-size: 11px; }
+  .card-body>p, .stat p, .section-heading p { font-size: 9px; }
+  .stat-label { font-size: 10px; }
+  .card-footer, .card-controls>span { font-size: 9px; }
+  .shopping-label small, .included-row small, .shopping-quantity small { font-size: 9px; }
+  .shopping-help { font-size: 11px; }
+  .ingredient-hint, .include-checkbox { font-size: 10px; }
+}
