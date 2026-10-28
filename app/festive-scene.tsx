@@ -2,11 +2,11 @@ export function ChristmasLights() {
   return <div className="christmas-lights" aria-hidden="true">{Array.from({ length: 16 }, (_, i) => <span key={i} className={`bulb bulb-${i % 3}`} style={{ animationDelay: `${i * .3}s` }} />)}</div>;
 }
 
-export function ChristmasFriends() {
-  return <div className="christmas-friends" role="img" aria-label="Animovaný Grinch v santovském kabátu mává. Vedle něj je sobík a pejsek Max.">
+export function ChristmasFriends({ cleaning = false }: { cleaning?: boolean }) {
+  return <div className={`christmas-friends ${cleaning ? "cleaning-crew" : ""}`} role="img" aria-label={cleaning ? "Grinch v puntíkaté zástěře, koupací čepici a žlutých rukavicích mává prachovkou. Sobík má úklidovou zástěru a Max šátek, kyblík s pěnou a mop." : "Animovaný Grinch v santovském kabátu mává. Vedle něj je sobík a pejsek Max."}>
     <div className="hero-snow" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <i key={i} style={{ left: `${(i * 37 + 11) % 100}%`, animationDelay: `${-i * .7}s`, animationDuration: `${6 + i % 5}s`, width: `${3 + i % 3}px`, height: `${3 + i % 3}px` }} />)}</div>
     <svg viewBox="0 0 520 330" className="friends-illustration" aria-hidden="true">
-      <defs><linearGradient id="grinch-fur" x2=".7" y2="1"><stop stopColor="#bbe451"/><stop offset="1" stopColor="#84bb34"/></linearGradient><linearGradient id="santa-coat" x2=".7" y2="1"><stop stopColor="#e14747"/><stop offset="1" stopColor="#b72235"/></linearGradient><linearGradient id="deer-fur" x2=".8" y2="1"><stop stopColor="#b88a53"/><stop offset="1" stopColor="#8e633e"/></linearGradient></defs>
+      <defs><linearGradient id="grinch-fur" x2=".7" y2="1"><stop stopColor="#bbe451"/><stop offset="1" stopColor="#84bb34"/></linearGradient><linearGradient id="santa-coat" x2=".7" y2="1"><stop stopColor={cleaning ? "#529683" : "#e14747"}/><stop offset="1" stopColor={cleaning ? "#2c6557" : "#b72235"}/></linearGradient><linearGradient id="deer-fur" x2=".8" y2="1"><stop stopColor="#b88a53"/><stop offset="1" stopColor="#8e633e"/></linearGradient></defs>
       <g transform="translate(405 117) scale(.78)"><TreeDrawing/></g>
       <g opacity=".17" fill="#b8d3b2"><path d="m29 225 36-64 37 64H88l29 47H12l29-47Z"/><path d="m424 181 33-61 34 61h-16l30 54h-96l30-54Z"/><path d="m112 125 18-37 20 37h-9l17 32h-54l17-32Z"/></g>
       <g fill="#ecc774"><path d="m409 53 4 9 9 4-9 4-4 9-4-9-9-4 9-4Z"/><path d="m85 84 3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/><circle cx="468" cy="118" r="2.5"/><circle cx="157" cy="63" r="2"/></g>
@@ -22,6 +22,7 @@ export function ChristmasFriends() {
           <g fill="#2e352d"><ellipse cx="63" cy="78" rx="4" ry="6"/><ellipse cx="102" cy="78" rx="4" ry="6"/></g><g fill="white"><circle cx="64" cy="76" r="1.5"/><circle cx="103" cy="76" r="1.5"/></g>
           <ellipse cx="83" cy="99" rx="16" ry="12" fill="#d94043" className="deer-nose"/><ellipse cx="78" cy="95" rx="5" ry="3" fill="#ffb5a2"/><path d="M76 116q8 8 16 0" fill="none" stroke="#82633f" strokeWidth="2.5" strokeLinecap="round"/>
         </g><path d="M48 130q35 16 70-1l-5 16q-35 14-62-1Z" fill="#c82f42"/><path d="m104 145 14 5-11 35-14-6Z" fill="#d33844"/><path d="m95 171 13 6" stroke="#edb46e" strokeWidth="4"/>
+        {cleaning && <><path d="m67 140 36 1 8 48q-29 11-51-1Z" fill="#e6eac7" stroke="#6c8b65" strokeWidth="2"/><path d="M73 158h24v18q-13 10-24-1Z" fill="#bd4554"/><path d="m78 140 7 13 8-13" fill="none" stroke="#718b63" strokeWidth="3"/></>}
       </g></g>
       <g transform="translate(177 6)"><g className="grinch-bob">
         <ellipse cx="92" cy="285" rx="58" ry="8" fill="#bbccb4"/>
@@ -30,12 +31,14 @@ export function ChristmasFriends() {
         <path d="M51 192q41 16 90-1l3 16q-48 16-96-1Z" fill="#352f2b"/><rect x="87" y="192" width="24" height="19" rx="3" fill="#e9bc65"/><rect x="93" y="197" width="12" height="9" rx="1" fill="#534c32"/>
         <path d="M47 246q43 19 100-1l3 13q-56 25-104 1Z" fill="#fff2d9"/><path d="M22 216 46 226l-6 12-24-10Z" fill="#fff2d9"/>
         <path d="m18 226-12 7q-8 5 0 11l16 4-4-7 16 6q10 0 5-7l-15-12Z" fill="#a6d74a"/>
+        {cleaning && <><path d="m69 140 45 2 7 29 19 72q-44 19-85 0l15-72Z" fill="#f0b9bc" stroke="#d48f97" strokeWidth="1.5"/><path d="m74 143-9-5-11 7m60-2 13-5 8 8" stroke="#f5dad1" strokeWidth="5" fill="none"/>{[[79,167],[101,160],[115,181],[72,195],[105,205],[86,229],[125,229],[61,223]].map(([x,y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="3.2" fill="#fff7e9"/>)}<path d="M78 188h33v23q-16 13-33-1Z" fill="#e98f9e"/><path d="M90 194q-8-7-9 1-1 6 13 12 13-9 8-13-5-4-8 1Z" fill="#fff1dc"/><path d="m18 226-12 7q-8 5 0 11l16 4-4-7 16 6q10 0 5-7l-15-12Z" fill="#ebc35d"/></>}
         <g className="grinch-wave"><path d="M126 145q29-1 36-24l10-28 25 12-12 40q-10 29-42 34Z" fill="url(#santa-coat)"/><path d="m169 95 30 11 5-13-32-12Z" fill="#fff2d9"/>
           <path d="M176 83q-6-13-3-25 3-10 8 0l2 12 2-23q3-10 7 0l-1 20 5-21q4-9 7 1l-5 23 8-16q7-6 7 4l-8 22q-2 17-13 17Z" fill="#a8d94c" stroke="#78a832" strokeWidth="1.5"/>
+          {cleaning && <><path d="m194 85 27-48" stroke="#9a7147" strokeWidth="7" strokeLinecap="round"/><g transform="translate(224 27) rotate(24)"><ellipse rx="17" ry="22" fill="#cf8d9b"/><path d="M-13-10Q-4-20 0 18M0-20v40M12-9Q3-20 0 18" fill="none" stroke="#f0bbc4" strokeWidth="5" strokeLinecap="round"/><path d="M-11 12q9 13 22 0" fill="none" stroke="#b9768b" strokeWidth="4"/></g><path d="M178 83q-5-13-3-20 2-5 6-1l3 11 7-18q4-7 8-2l-5 17 7-10q7-4 8 2l-9 17q-1 17-13 16Z" fill="#efd36a" stroke="#c69d48" strokeWidth="1.4"/></>}
         </g>
         <path d="M61 132q32 24 64 0l8 13q-42 27-77 3Z" fill="#fff2d9"/>
         <g className="grinch-head"><path d="M50 67q-9-9-6-14l14 3q-4-16 10-32l7 12q14-20 31-20l-3 16q22-11 33 6l-9 3q25 19 21 50l-8 30q-18 30-51 20-45-10-51-46l-12-11 18-4-11-11Z" fill="url(#grinch-fur)" stroke="#7eae35" strokeWidth="2"/>
-          <path d="M51 47q5-48 52-35 22 7 34 31l-26-3q-25-9-60 7Z" fill="#c72d3e"/><path d="M68 24q21-19 49-4l15 4q12 4 14 15l-8 17-14-8 3-13q-38-14-59-11Z" fill="#e14045"/><circle cx="139" cy="50" r="13" fill="#fff5dd"/><path d="M45 47q48-24 94-3l-1 14q-48-14-88 5Z" fill="#fff3dc"/>
+          {cleaning ? <><path d="M45 49q-11-14 4-23-4-17 15-17 4-14 20-6 13-13 26-1 18-7 24 11 21 2 17 19 8 16-12 24Z" fill="#e9b1bb" stroke="#cc8f9c" strokeWidth="2"/>{[[61,27],[83,15],[105,21],[126,32],[92,38]].map(([x,y]) => <circle key={x} cx={x} cy={y} r="3.5" fill="#fff5e7"/>)}<path d="M45 48q48-19 95-1l-2 12q-46-13-89 5Z" fill="#fff2de"/><path d="M54 52q43-12 78-1" stroke="#d68f9e" strokeWidth="2" strokeDasharray="3 4" fill="none"/></> : <><path d="M51 47q5-48 52-35 22 7 34 31l-26-3q-25-9-60 7Z" fill="#c72d3e"/><path d="M68 24q21-19 49-4l15 4q12 4 14 15l-8 17-14-8 3-13q-38-14-59-11Z" fill="#e14045"/><circle cx="139" cy="50" r="13" fill="#fff5dd"/><path d="M45 47q48-24 94-3l-1 14q-48-14-88 5Z" fill="#fff3dc"/></>}
           <g className="grinch-eyes"><path d="M60 79q15-5 26 3-9 21-23 10Z" fill="#f1d36d"/><path d="M97 82q18-7 30-2-1 18-20 14Z" fill="#f1d36d"/><ellipse cx="76" cy="86" rx="3" ry="7" fill="#243622"/><ellipse cx="107" cy="86" rx="3" ry="7" fill="#243622"/></g>
           <path d="m57 71 30 9m11 0 33-10" stroke="#33501f" strokeWidth="5" strokeLinecap="round"/><path d="M86 96q11-7 21 0l-8 8-9-3Z" fill="#6c9c2e"/>
           <path d="M55 102q39 41 76-3-20 32-47 27-18-3-29-24Z" fill="#497129"/><path d="M66 111q29 19 53-3-13 26-38 16Z" fill="#f7efcf"/><path d="M49 104q9-9 19 2m54-6q9-8 16-2" fill="none" stroke="#5b842a" strokeWidth="2" strokeLinecap="round"/><path d="m65 136-6 3m68-9 6 2" stroke="#92bb3e" strokeWidth="3"/>
@@ -46,10 +49,11 @@ export function ChristmasFriends() {
         <ellipse cx="60" cy="93" rx="36" ry="25" fill="#b88852"/><path d="m36 100-5 20h19l4-19m25-1 1 21h18l-8-22" fill="#bc8d54"/><path d="M30 118h22v8H28m52-8h20v8H80" fill="#94673d"/>
         <g className="max-head"><path d="M28 20q-27 1-27 42 3 18 18 6l17-36m37-11q31-1 35 32 4 20-14 18L77 32" fill="#8d613c"/>
           <path d="M21 45q-1-39 37-39 33 0 30 38l-3 26q-29 27-61-1Z" fill="#c3945c"/><path d="M23 56q31-19 59 0l-1 16q-28 20-55-3Z" fill="#e4c292"/>
-          <path d="M27 20q30-18 60 0" fill="none" stroke="#c73341" strokeWidth="6"/><path d="M55 14 54-9m0 7L44-13m10 5 12-10M55-5l-1-20" fill="none" stroke="#d8c69a" strokeWidth="5" strokeLinecap="round"/>
+          {cleaning ? <><path d="M22 20q34-27 67 0l-6 8q-30-16-57 0Z" fill="#84b6b5"/><path d="m85 22 11 11-14 1Z" fill="#659a9a"/><g fill="#e4f1e4"><circle cx="42" cy="14" r="2"/><circle cx="61" cy="14" r="2"/><circle cx="78" cy="19" r="2"/></g></> : <><path d="M27 20q30-18 60 0" fill="none" stroke="#c73341" strokeWidth="6"/><path d="M55 14 54-9m0 7L44-13m10 5 12-10M55-5l-1-20" fill="none" stroke="#d8c69a" strokeWidth="5" strokeLinecap="round"/></>}
           <g className="max-eyes" fill="#332f27"><ellipse cx="40" cy="43" rx="4" ry="6"/><ellipse cx="69" cy="43" rx="4" ry="6"/></g><g fill="white"><circle cx="41" cy="41" r="1.3"/><circle cx="70" cy="41" r="1.3"/></g><path d="M45 57q11-9 22 0l-3 8H49Z" fill="#3d382e"/><path d="M45 70q13 12 25-2" fill="none" stroke="#87613d" strokeWidth="2.5" strokeLinecap="round"/><path d="M59 73q13-6 13 6-1 15-11 12Z" fill="#e78979"/><path d="M65 77v9" stroke="#bc655d" strokeWidth="1.5"/>
         </g><path d="M21 77q29 18 64-2l1 10q-28 24-67 8Z" fill="#be2b3d"/><path d="m35 92 13 2-3 18-13-4Z" fill="#d64147"/><circle cx="68" cy="90" r="6" fill="#eaca78"/>
       </g></g>
+      {cleaning && <g><path d="m430 278 27-85" stroke="#ae8960" strokeWidth="5" strokeLinecap="round"/><path d="M423 270q-6 13-10 25m13-23-3 27m8-26 3 23m0-25 8 21" stroke="#a5cdca" strokeWidth="6" strokeLinecap="round"/><path d="M142 266h45l-5 36h-35Z" fill="#79a6a0" stroke="#4e827a" strokeWidth="2"/><path d="M148 266q14-30 33 0" fill="none" stroke="#e0d7b8" strokeWidth="3"/><ellipse cx="165" cy="266" rx="23" ry="5" fill="#abc8bb"/><g fill="#fff9ea" stroke="#d9e4d2" strokeWidth="1"><circle cx="151" cy="261" r="7"/><circle cx="166" cy="258" r="9"/><circle cx="179" cy="261" r="6"/><circle cx="158" cy="247" r="4"/></g><path d="m322 190 3 6 7 1-5 4 1 7-6-3-6 3 1-7-5-4 7-1Z" fill="#e7c475"/></g>}
     </svg>
   </div>;
 }

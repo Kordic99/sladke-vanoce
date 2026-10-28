@@ -7,7 +7,8 @@ export const eventKinds = ["dough", "bake", "decorate", "shopping", "other"] as 
 export type EventKind = typeof eventKinds[number];
 export type CalendarEvent = { id: string; title: string; date: string; time?: string; kind: EventKind; done: boolean };
 export type Recipe = { id: string; name: string; art: string; image?: string; events?: CalendarEvent[]; batches: number; active: boolean; baked: boolean; notes: string; ingredients: Ingredient[] };
-export type Plan = { recipes: Recipe[]; bought: Record<string, number> };
+export type CleaningTask = { id: string; title: string; room: string; date: string; time: string; notes: string; done: boolean };
+export type Plan = { recipes: Recipe[]; bought: Record<string, number>; cleaningTasks?: CleaningTask[] };
 export type ShoppingItem = { key: string; name: string; unit: Unit; amount: number; purchased: number; recipes: { name: string; amount: number }[] };
 export const uid = () => {
   if (typeof crypto.randomUUID === "function") return crypto.randomUUID();
@@ -75,6 +76,7 @@ export function validateEvents(value: unknown): value is CalendarEvent[] {
 export function validatePlan(value: unknown): value is Plan {
   if (!value || typeof value !== "object") return false;
   const p = value as Plan;
+  if (p.cleaningTasks !== undefined && !validateCleaningTasks(p.cleaningTasks)) return false;
   if (!Array.isArray(p.recipes) || p.recipes.length > 100 || !p.bought || typeof p.bought !== "object" || Array.isArray(p.bought)) return false;
   if (Object.keys(p.bought).length > 10000 || Object.values(p.bought).some(n => typeof n !== "number" || !Number.isFinite(n) || n < 0 || n > 1e12)) return false;
   const recipeIds = new Set<string>();
@@ -88,6 +90,16 @@ export function validatePlan(value: unknown): value is Plan {
       if (!i || typeof i.id !== "string" || !i.id || i.id.length > 100 || ids.has(i.id) || typeof i.name !== "string" || !i.name.trim() || i.name.length > 100 || !units.includes(i.unit) || !Number.isFinite(i.amount) || i.amount <= 0 || i.amount > 1e7) return false;
       ids.add(i.id);
     }
+  }
+  return true;
+}
+
+export function validateCleaningTasks(value: unknown): value is CleaningTask[] {
+  if (!Array.isArray(value) || value.length > 300) return false;
+  const ids = new Set<string>();
+  for (const t of value) {
+    if (!t || typeof t.id !== "string" || !t.id || t.id.length > 100 || ids.has(t.id) || typeof t.title !== "string" || !t.title.trim() || t.title.length > 120 || typeof t.room !== "string" || t.room.length > 60 || typeof t.date !== "string" || (t.date !== "" && !isISODate(t.date)) || typeof t.time !== "string" || (t.time !== "" && (!t.date || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(t.time))) || typeof t.notes !== "string" || t.notes.length > 1500 || typeof t.done !== "boolean") return false;
+    ids.add(t.id);
   }
   return true;
 }

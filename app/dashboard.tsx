@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { TreePine, LayoutDashboard, Cookie, ShoppingBasket, Plus, ArrowUpRight, ArrowRight, Check, CloudCheck, CloudUpload, CircleAlert, Minus, Search, Printer, X, Trash2, Download, Sparkles, ChefHat, CheckCheck, Folder, Menu, Leaf, RefreshCw, ImagePlus, Pause, Play, CalendarDays, Bell } from "lucide-react";
+import { TreePine, LayoutDashboard, Cookie, ShoppingBasket, Plus, ArrowUpRight, ArrowRight, Check, CloudCheck, CloudUpload, CircleAlert, Minus, Search, Printer, X, Trash2, Download, Sparkles, ChefHat, CheckCheck, Folder, Menu, Leaf, RefreshCw, ImagePlus, Pause, Play, CalendarDays, Bell, BrushCleaning } from "lucide-react";
 import { aggregate, isBought, normalizeName, parseAmount, quantity, uid, units, validatePlan, validateEvents, MAX_PLAN_CHARS } from "../lib/plan";
 import { loadBrowserPlan, saveBrowserPlan } from "../lib/browser-storage";
 import type { PlanSync } from "../lib/plan-sync";
@@ -11,13 +11,14 @@ import { ChristmasFriends, ChristmasLights, NorthPoleExpress, SnowyChristmasTree
 import { ChristmasCountdown } from "./christmas-countdown";
 import { MobileGuide } from "./mobile-guide";
 import { prepareRecipeImage } from "../lib/recipe-image";
+import { CleaningView } from "./cleaning";
 
 import { calendarEntries } from "../lib/calendar";
 import type { CalendarEntry } from "../lib/calendar";
 import { CalendarView, UpcomingPanel, RecipeScheduleFields, EventDialog, DailyReminder, useToday } from "./calendar";
 import type { EventEditorState } from "./calendar";
 
-type View = "overview" | "recipes" | "shopping" | "calendar";
+type View = "overview" | "recipes" | "shopping" | "calendar" | "cleaning";
 type SaveStatus = "saved" | "saving" | "error" | "conflict";
 const plural = (n: number, one: string, few: string, many: string) => `${n.toLocaleString("cs-CZ")} ${n === 1 ? one : !Number.isInteger(n) || n >= 2 && n <= 4 ? few : many}`;
 const illustrations = ["rolls", "linzer", "ginger", "nests", "stars", "coconut"];
@@ -37,6 +38,7 @@ export default function Dashboard({ initialPlan, initialRevision, browserStorage
   const [animations, setAnimations] = useState(true);
   const [eventEditor, setEventEditor] = useState<EventEditorState | null>(null);
   const [showToday, setShowToday] = useState(false);
+  const [cleaningEditing, setCleaningEditing] = useState(false);
   const today = useToday();
   const entries = useMemo(() => calendarEntries(plan), [plan]);
   const todayCount = entries.filter(e => e.date === today && !e.done).length;
@@ -96,7 +98,7 @@ export default function Dashboard({ initialPlan, initialRevision, browserStorage
     const stop = sync.start();
     return () => { stop(); unsubscribe(); };
   }, [sync]);
-  useEffect(() => { sync?.setPaused(!!editor || !!eventEditor); }, [sync, editor, eventEditor]);
+  useEffect(() => { sync?.setPaused(!!editor || !!eventEditor || cleaningEditing); }, [sync, editor, eventEditor, cleaningEditing]);
   useEffect(() => {
     const beforeUnload = (event: BeforeUnloadEvent) => { if (pending.current) { event.preventDefault(); event.returnValue = ""; } };
     const online = () => { void save(); };
@@ -182,6 +184,7 @@ export default function Dashboard({ initialPlan, initialRevision, browserStorage
         <button className={view === "recipes" ? "selected" : ""} onClick={() => navigate("recipes")}><Cookie size={19}/>Moje dobroty<span className="nav-count">{plan.recipes.length}</span></button>
         <button className={view === "shopping" ? "selected" : ""} onClick={() => navigate("shopping")}><ShoppingBasket size={19}/>Nákupní seznam{shopping.length > bought && <span className="nav-count">{shopping.length - bought}</span>}</button>
         <button className={view === "calendar" ? "selected" : ""} onClick={() => navigate("calendar")}><CalendarDays size={19}/>Kalendář{todayCount > 0 && <span className="nav-count">{todayCount}</span>}</button>
+        <button className={view === "cleaning" ? "selected" : ""} onClick={() => navigate("cleaning")}><BrushCleaning size={19}/>Úklid</button>
       </nav>
       <div className="folders-label">VAŠE DOBROTY <button title="Přidat dobrotu" aria-label="Přidat dobrotu" onClick={newRecipe}><Plus size={15}/></button></div>
       <div className="folder-list">{plan.recipes.map(r => <button key={r.id} onClick={() => openRecipe(r)}><Folder size={15}/><span>{r.name}</span>{r.baked && <Check size={14} className="folder-check"/>}</button>)}</div>
@@ -191,7 +194,7 @@ export default function Dashboard({ initialPlan, initialRevision, browserStorage
     <div className="workspace">
       <header className="topbar"><div className="topbar-left"><button className="mobile-toggle icon-button" aria-label="Otevřít nabídku" onClick={() => setMobileMenu(true)}><Menu size={22}/></button><span>VÁNOCE PODLE NAŠÍ CHUTI</span></div><div className="topbar-right"><button className="today-bell" aria-label={`Dnešní připomenutí, nesplněné úkoly: ${todayCount}`} onClick={() => setShowToday(true)} title="Dnešní připomenutí"><Bell size={18}/>{todayCount > 0 && <b>{todayCount}</b>}</button><button className="animation-toggle" onClick={toggleAnimations} aria-pressed={animations} aria-label={animations ? "Vypnout vánoční animace" : "Zapnout vánoční animace"} title={animations ? "Vypnout animace" : "Zapnout animace"}>{animations ? <Pause size={14}/> : <Play size={14}/>}<span>Animace</span></button><span className={`save-status ${status}`} role="status">{status === "saved" ? <CloudCheck size={16}/> : status === "saving" ? <CloudUpload size={16}/> : <CircleAlert size={16}/>}<span>{status === "saved" ? "Vše uloženo" : status === "saving" ? "Ukládám…" : "Neuložené změny"}</span></span><span className="season-tag"><Sparkles size={13}/>Vánoce 2026</span></div><ChristmasLights/></header>
       <main>
-        {sync && <div className="cloud-account"><span><CloudCheck size={15}/><span>Společný seznam <small>{account}</small></span></span><button onClick={() => { if (sync.state.dirty || editor || eventEditor) { setNotice("Nejprve uložte nebo zavřete rozepsané změny. Neodeslaný seznam můžete stáhnout jako zálohu."); return; } onSignOut?.(); }}>Odhlásit</button></div>}
+        {sync && <div className="cloud-account"><span><CloudCheck size={15}/><span>Společný seznam <small>{account}</small></span></span><button onClick={() => { if (sync.state.dirty || editor || eventEditor || cleaningEditing) { setNotice("Nejprve uložte nebo zavřete rozepsané změny. Neodeslaný seznam můžete stáhnout jako zálohu."); return; } onSignOut?.(); }}>Odhlásit</button></div>}
         {!!error && <div className="error-banner" role="alert"><CircleAlert size={20}/><p>{error}</p>{status === "conflict" ? <><button onClick={backup}><Download size={15}/>Záloha změn</button><button onClick={() => void reload()}><RefreshCw size={15}/>Načíst aktuální</button></> : <button onClick={() => void save()}>Zkusit znovu</button>}</div>}
         {view === "overview" ? <>
           <section className="hero festive-hero"><div className="hero-copy"><div className="eyebrow"><Sparkles size={12}/>MALÝ PLÁN. VELKÉ VÁNOCE.</div><ChristmasCountdown/><p>Cukroví, salát i rodinné speciality.<br className="desktop-break"/> Všechny suroviny pohromadě, ať nám nic nechybí.</p><button className="text-link" onClick={() => navigate("shopping")}>Hurá na vánoční nákup <ArrowRight size={16}/></button></div><ChristmasFriends/></section><NorthPoleExpress/><UpcomingPanel plan={plan} today={today} onCalendar={() => navigate("calendar")} onAdd={addEvent} onEdit={editEvent} onToggle={toggleEvent}/>
@@ -204,7 +207,7 @@ export default function Dashboard({ initialPlan, initialRevision, browserStorage
           <div className="page-heading"><div className="eyebrow">VAŠE VÁNOČNÍ KUCHAŘKA</div><div className="title-row"><div><h1>Naše <em>dobroty.</em></h1><p>Cukroví, salát i speciality. Vlastní recepty, obrázky a libovolný počet dávek.</p></div><button className="primary-button" onClick={newRecipe}><Plus size={17}/>Přidat dobrotu</button></div></div>
           <div className="view-toolbar"><SearchBox value={search} onChange={setSearch} placeholder="Najít dobrotu…"/><span>{plural(plan.recipes.length, "druh v kuchařce", "druhy v kuchařce", "druhů v kuchařce")}</span></div>
           <div className="recipe-grid full">{visibleRecipes.map(r => <RecipeCard key={r.id} recipe={r} open={() => openRecipe(r)} change={v => changeRecipe(r.id, v)} shopping={shopping}/>)}{plan.recipes.length === 0 ? <EmptyRecipes onAdd={newRecipe}/> : visibleRecipes.length === 0 && <div className="no-results">Žádná dobrota s tímto názvem. <button onClick={() => setSearch("")}>Zrušit hledání</button></div>}</div>
-        </> : view === "calendar" ? <CalendarView plan={plan} today={today} onAdd={addEvent} onEdit={editEvent} onToggle={toggleEvent}/> : <>
+        </> : view === "calendar" ? <CalendarView plan={plan} today={today} onAdd={addEvent} onEdit={editEvent} onToggle={toggleEvent}/> : view === "cleaning" ? <CleaningView tasks={plan.cleaningTasks || []} today={today} disabled={status === "conflict"} onEditing={setCleaningEditing} onChange={fn => update(p => ({ ...p, cleaningTasks: fn(p.cleaningTasks || []) }))}/> : <>
           <div className="page-heading"><div className="eyebrow">VŠECHNY SUROVINY POHROMADĚ</div><div className="title-row"><div><h1>Nákupní <em>seznam.</em></h1><p>Sečteno ze všech dobrot a dávek. Stačí nakoupit a odškrtnout.</p></div><button className="secondary-button print-button" onClick={() => window.print()}><Printer size={17}/>Vytisknout</button></div></div>
           <section className="shopping-summary"><div><span className="summary-icon"><ShoppingBasket size={24}/></span><div><h3>{shopping.length ? bought === shopping.length ? "Máme všechno. Můžeme péct!" : `Ještě ${plural(shopping.length - bought, "položka", "položky", "položek")} a jde se péct.` : "Začněte surovinami do svého cukroví."}</h3><p>{bought} z {shopping.length} položek nakoupeno · {plural(activeRecipes.length, "dobrota", "dobroty", "dobrot")} v plánu</p></div></div><div className="summary-progress"><span>{progress} %</span><div className="progress-track"><i style={{ width: `${progress}%` }}/></div></div></section>
           <div className="shopping-layout"><section className="shopping-table panel"><div className="shopping-toolbar"><div className="filters" role="group" aria-label="Filtrovat nákup"><button className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>Vše <span>{shopping.length}</span></button><button className={filter === "missing" ? "active" : ""} onClick={() => setFilter("missing")}>K nákupu <span>{shopping.length - bought}</span></button><button className={filter === "bought" ? "active" : ""} onClick={() => setFilter("bought")}>Nakoupeno <span>{bought}</span></button></div><SearchBox value={search} onChange={setSearch} placeholder="Najít surovinu…"/></div><div className="table-header"><span>SUROVINA A CUKROVÍ</span><span>CELKEM</span></div><div className="shopping-rows">{visibleShopping.map(i => <ShoppingRow key={i.key} item={i} onToggle={() => toggleBought(i)}/>)}{shopping.length === 0 ? <div className="shopping-empty"><span className="empty-icon"><ShoppingBasket size={32} strokeWidth={1.3}/></span><h3>Nákupní seznam je zatím prázdný</h3><p>Přidejte suroviny k jednotlivým dobrotám.<br/>Celková množství se tu objeví automaticky.</p><button className="primary-button" onClick={() => navigate("recipes")}>Přejít na dobroty <ArrowRight size={16}/></button></div> : visibleShopping.length === 0 && <div className="no-results">{filter === "bought" ? "Zatím není nic odškrtnuté." : filter === "missing" && !search ? "Vše už máte nakoupené. Krásné pečení!" : "Žádná surovina neodpovídá hledání."}</div>}</div><div className="table-footer"><CloudCheck size={14}/>Změny se ukládají automaticky.</div></section><aside className="shopping-aside"><section className="panel included-panel"><h3><Cookie size={18}/>Počítáme s těmito dobrotami</h3>{plan.recipes.map(r => <label className="included-row" key={r.id}><input type="checkbox" checked={r.active} onChange={e => changeRecipe(r.id, { active: e.target.checked })}/><span>{r.name}<small>{plural(r.batches, "dávka", "dávky", "dávek")} · {plural(r.ingredients.length, "surovina", "suroviny", "surovin")}</small></span></label>)}{!plan.recipes.length && <p>Nejprve přidejte dobrota.</p>}</section><div className="shopping-help"><Sparkles size={19}/><p>Stejné názvy se slučují. <strong>g + kg</strong> a <strong>ml + l</strong> se přepočítají; kusy, lžíce a balíčky zůstávají zvlášť.</p><p>Pokud zvýšíte dávky, nakoupené množství se zachová a uvidíte, kolik ještě zbývá.</p></div></aside></div>
@@ -217,10 +220,11 @@ export default function Dashboard({ initialPlan, initialRevision, browserStorage
       <button aria-current={view === "recipes" ? "page" : undefined} onClick={() => navigate("recipes")}><Cookie size={21}/><span>Dobroty</span></button>
       <button aria-current={view === "shopping" ? "page" : undefined} onClick={() => navigate("shopping")}><ShoppingBasket size={21}/><span>Nákup</span>{shopping.length > bought && <b>{shopping.length - bought}</b>}</button>
       <button aria-current={view === "calendar" ? "page" : undefined} onClick={() => navigate("calendar")}><CalendarDays size={21}/><span>Kalendář</span>{todayCount > 0 && <b>{todayCount}</b>}</button>
+      <button aria-current={view === "cleaning" ? "page" : undefined} onClick={() => navigate("cleaning")}><BrushCleaning size={21}/><span>Úklid</span></button>
     </nav>
     {editor && <RecipeEditor key={editor.id} recipe={editor} isNew={isNew} names={[...new Set([...commonIngredients, ...plan.recipes.flatMap(r => r.ingredients.map(i => i.name))])]} onClose={() => setEditor(null)} onSave={r => { update(p => ({ ...p, recipes: isNew ? [...p.recipes, r] : p.recipes.map(x => x.id === r.id ? r : x) })); setEditor(null); setNotice(isNew ? "Nová dobrota je v kuchařce." : "Dobrota i její termíny jsou uložené."); }} onDelete={() => { update(p => ({ ...p, recipes: p.recipes.filter(r => r.id !== editor.id) })); setEditor(null); setNotice("Dobrota byla odebrána z plánu."); }}/>}
     {eventEditor && <EventDialog plan={plan} state={eventEditor} onClose={() => setEventEditor(null)} onSave={saveEvent} onDelete={deleteEvent}/>}
-    <DailyReminder key={today} today={today} entries={entries} paused={!!editor || !!eventEditor} manual={showToday} onManualClose={() => setShowToday(false)} onCalendar={() => navigate("calendar")} onToggle={toggleEvent}/>
+    <DailyReminder key={today} today={today} entries={entries} paused={!!editor || !!eventEditor || cleaningEditing} manual={showToday} onManualClose={() => setShowToday(false)} onCalendar={() => navigate("calendar")} onToggle={toggleEvent}/>
     {notice && <div className="toast" role="status"><Check size={17}/>{notice}</div>}
     <div className="print-footer">Sladké Vánoce · Nákupní seznam pro naše vánoční pečení</div>
   </div>;

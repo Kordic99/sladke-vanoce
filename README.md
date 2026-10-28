@@ -2,6 +2,8 @@
 
 Vánoční plánovač pro iPhone i počítač: dobroty s vlastními obrázky, součet surovin, odškrtávání nákupů, kalendář příprav a odpočet do Štědrého dne.
 
+Stránka **Úklid** nabízí společný seznam úkolů s místností, datem, časem a poznámkou. Úkoly lze upravovat, odškrtávat a mazat; přehled rozlišuje dnešek, prošlé termíny a hotové věci. Ukládají se do stejného soukromého plánu v Supabase a obsahují je i JSON zálohy. Starší zálohy bez úklidu zůstávají platné.
+
 Online verze používá GitHub Pages a Supabase. Dva telefony přihlášené **stejným účtem aplikace** sdílejí recepty, fotografie, nákup i termíny. Přihlášení do administrace Supabase je oddělené.
 
 ## První otevření na telefonu
